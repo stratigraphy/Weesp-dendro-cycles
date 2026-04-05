@@ -215,6 +215,8 @@ VA25mean_wt <- analyze_wavelet(
   run_multicore = FALSE
 )
 
+#The BCE_CE_wavelet_plot function is a modified version of the plot_wavelet function from the WaverideR R package 
+
 BCE_CE_wavelet_plot <- function (wavelet = NULL, lowerPeriod = NULL, upperPeriod = NULL, 
           n.levels = 100, palette_name = "rainbow", color_brewer = "grDevices", 
           useRaster = TRUE, periodlab = "Period (metres)", x_lab = "depth (metres)", 
@@ -597,6 +599,8 @@ legend("topright", legend = names(cols), fill = cols, border = NA, bty = "n", ce
 #| fig.cap: "Figure 5. Bicoherence plot illustrating nonlinear interactions between cyclic components of the Growth Index record. The WOSA power spectra are shown along the horizontal and vertical axes, with major cyclic components indicated by gray lines. The color scale represents the bicoherence magnitude (ranging from 0 to 1) corresponding to the strength of nonlinear coupling between frequencies. Regions significant at the 95% confidence level are outlined by thick black contours, while inferred nonlinear interactions are highlighted with black dotted lines."
 
 library(fields)
+
+#The code blow is modified version of the biocherence function from the Astrochron R package 
 
 periods <- c(1/5.7,1/6.9,1/8,1/9.5,1/10.75,1/12,1/14,1/16,1/18,1/24, 1/40, 1/60,1/100)
 
@@ -1443,57 +1447,13 @@ stal_scot <- read.csv("https://raw.githubusercontent.com/stratigraphy/Weesp-dend
 stal_scot <- stal_scot[,c(2,3)]
 stal_scot <- sortNave(stal_scot,genplot=FALSE,verbose=FALSE)
 stal_scot[,2] <-scale(stal_scot[,2])
-#stal_scot <- taner(linterp(stal_scot,genplot=FALSE,verbose=FALSE),flow=1/(256),fhigh=1,genplot=FALSE,verbose=FALSE)
-#VA25mean[,2]<- scale(VA25mean[,2])
-
-#VA25mean2<- taner(linterp(VA25mean,genplot=FALSE,verbose=FALSE),flow=1/(256),fhigh=1,genplot=FALSE,verbose=FALSE)
-
-                 
-# 1. Clear previous results to prevent length mismatches
-rm(shifts, cor_results)
-
-# 2. Setup (matching your updated settings)
-target_depths <- VA25mean[,1]
-target_values <- VA25mean[,2]
-shifts <- seq(-60, 60, by = 0.1)
-cor_results <- numeric(length(shifts))
-
-# 3. The Loop
-for (i in 1:length(shifts)) {
-  temp_stal <- stal_scot
-  temp_stal[,1] <- temp_stal[,1] - shifts[i]
-  
-  interp_values <- approx(x = temp_stal[,1], 
-                          y = temp_stal[,2], 
-                          xout = target_depths)$y
-  
-  cor_results[i] <- cor(target_values, interp_values, use = "complete.obs")
-}
-
-# 3. ANALYSIS OF RESULTS
-best_idx   <- which.max(abs(cor_results))
-best_shift <- shifts[best_idx]
-best_cor   <- cor_results[best_idx]
-
-# cat("\n--- Optimization Results ---\n")
-# cat("Optimal Shift:", best_shift, "\n")
-# cat("Max Correlation (r):", best_cor, "\n")
-# 
-# 
-# # 4. Final Plot
-# plot(shifts, cor_results, type = "l", col = "steelblue", lwd = 2,
-#      main = "Shift Optimization",
-#      xlab = "Shift Amount (meters)",
-#      ylab = "Correlation (r)")
-# abline(v = best_shift, col = "red", lty = 2)
-# grid()
-
 
 stal_scot_shift <- stal_scot
-stal_scot_shift[,1] <- stal_scot_shift[,1]#-17.7#+37#-17.7
+stal_scot_shift[,1] <- stal_scot_shift[,1]
 stal_scot_shift <- linterp(stal_scot_shift,genplot=FALSE,verbose = FALSE)
 
 ```
+
 
 # Cross Wavelet analysis
 ```{r cross wavelet}
@@ -1503,6 +1463,8 @@ stal_scot_shift <- linterp(stal_scot_shift,genplot=FALSE,verbose = FALSE)
 #| fig.cap: "Figure 7."
 #| fig-width: 8
 #| fig-height: 8
+
+#The analyze_xwavelet function is a modified version of the analyze_Xwavelet function from the WaverideR R package 
 analyze_xwavelet <- function(
     data_1,
     data_2,
@@ -1620,6 +1582,9 @@ add_bce_ce_axis <- function() {
   # 4. Draw specific Year 1 label
   axis(1, at = 1, labels = "1", font = 2)
 }
+
+#The plot_Xwavelet function is a modified version of the plot_Xwavelet function from the WaverideR R package 
+
 
 plot_Xwavelet <- function(Xwavelet = NULL, lowerPeriod = NULL, upperPeriod = NULL,
                            n.levels = 100, palette_name = "rainbow", color_brewer = "grDevices",
@@ -1840,8 +1805,6 @@ plot(t, d1, type = "l", lwd = 2, col = "black",
 lines(t, d2_lag, col = "red", lty = 2, lwd = 2)
 # Note: The Black peak is to the LEFT of the Red peak. 
 # It happened earlier in time.
-
-
 
 x_wt<- analyze_xwavelet(
   data_1=cbind(t,d1),
