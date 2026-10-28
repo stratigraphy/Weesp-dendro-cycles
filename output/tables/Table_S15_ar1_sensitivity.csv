@@ -1,0 +1,13 @@
+"Estimated_on","phi"
+"observed series, no notching",0.662
+"manuscript notch list: 3.6-110 yr, 10 bands",0.51
+"  + 2.2 yr (near-Nyquist) added",0.633
+"  + 200 yr added",0.51
+"only the four supported components (15.4,24,38,60)",0.543
+"only the multidecadal band (38, 60)",0.619
+"only decadal and shorter (3.6-24)",0.625
+"notch 3.6-110 yr, +/- 5%",0.587
+"notch 3.6-110 yr, +/- 7.5%",0.557
+"notch 3.6-110 yr, +/- 10%",0.51
+"notch 3.6-110 yr, +/- 15%",0.38
+"notch 3.6-110 yr, +/- 20%",-0.113

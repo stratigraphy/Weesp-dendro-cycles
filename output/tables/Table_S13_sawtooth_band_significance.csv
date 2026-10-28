@@ -1,0 +1,13 @@
+"Band","Peak_period","Background","p_max_in_band"
+"8-16",13,"white noise",0.069
+"16-32",26,"white noise",0
+"32-64",32,"white noise",0
+"8-16",13,"AR(1) phi=0.685 (observed)",0.936
+"16-32",26,"AR(1) phi=0.685 (observed)",0.948
+"32-64",32,"AR(1) phi=0.685 (observed)",0.961
+"8-16",13,"AR(1) phi=0.644 (signal-corrected)",0.959
+"16-32",26,"AR(1) phi=0.644 (signal-corrected)",0.93
+"32-64",32,"AR(1) phi=0.644 (signal-corrected)",0.914
+"8-16",13,"power law beta=1.166",0
+"16-32",26,"power law beta=1.166",0
+"32-64",32,"power law beta=1.166",0.314

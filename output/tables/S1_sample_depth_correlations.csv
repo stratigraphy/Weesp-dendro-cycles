@@ -1,0 +1,5 @@
+"Comparison","r"
+"samp_depth vs Var(std050)",0.040764970399448
+"samp_depth vs Var(vsc101)",0.10729235831573
+"samp_depth vs Rbar101",0.159327063581382
+"Var(std050) vs Var(vsc101)",0.925027146246873
